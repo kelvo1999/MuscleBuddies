@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav {
+    /* background-color: aliceblue; */
+    text-align: center;
+    padding: 20%;
+}
+
+nav h1 {
+    text-transform: uppercase;
+    color: aqua;
+    font-size: 5em;
+}
+
+nav p {
+    color: red;
+    text-transform: capitalize;
+    font-size: 3em;
+}
+
+.topnav {
+    background-color: aliceblue;
+}
+
+.topnav ul li a {
+    list-style: none;
+    text-decoration: none;
+}
