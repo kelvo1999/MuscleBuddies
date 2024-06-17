@@ -3,8 +3,6 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: url(../img/bg.jpg);
-    background-size: cover;
 }
 
 header {
@@ -59,22 +57,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-
-.nav {
-    /* background-color: aliceblue; */
-    text-align: center;
-    padding: 10%;
-}
-
-.nav h1 {
-    text-transform: uppercase;
-    color: aqua;
-    font-size: 5em;
-}
-
-.nav p {
-    color: red;
-    text-transform: capitalize;
-    font-size: 3em;
 }
