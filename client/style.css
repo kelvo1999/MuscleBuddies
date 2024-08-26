@@ -1,120 +1,133 @@
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        top: 0;
-        width: 100%;
-        position: fixed;
-        left: 0;
-    }
-    
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-    }
-    
-    .logo {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-    
-    nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-    }
-    
-    nav ul li {
-        margin-left: 20px;
-    }
-    
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        padding: 8px 15px;
-        transition: background 0.3s;
-    }
-    
-    nav ul li a:hover {
-        background-color: #555;
-    }
-    
-    main {
-        padding: 20px;
-    }
-    
-    footer {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 10px 1px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        left: 0;
-    }
-    
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #03a9f4;
-    }
-    
-    .container {
-        position: relative;
-        width: 800px;
-        height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* min-height: 100vh; */
-        background: rgba(0, 0, 0, 0.125);
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
-    }
-    
-    .container .box {
-        position: relative;
-        width: 50%;
-        height: 100%;
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 40px;
-    }
-    
-    .container .box h2 {
-        color: #fff;
-        font-size: 1.2em;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-    
-    .container .box button {
-        cursor: pointer;
-        padding: 10px 20px;
-        background: #fff;
-        color: #333;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
-        outline: none;
-    }
-    
-    .formBx {
-        position: absolute;
-        left: 50px;
-        width: 350px;
-        height: 480px;
-        background: #fff;
-        z-index: 1000;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-    }
+/* Styles for Navbar and Footer */
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    top: 0;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    z-index: 1000;
+    /* Ensure header stays on top */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+main {
+    padding: 80px 20px 60px 20px;
+    /* Added top padding to accommodate fixed header and bottom padding for footer */
+    margin: 0 auto;
+    /* Center align the content */
+    max-width: 800px;
+    /* Limit the maximum width of the content */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 1px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    /* Ensure footer stays on top of content */
+}
+
+
+/* Additional Styles for Form */
+
+form {
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+
+/* Notification Styles */
+
+.notification {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.notification.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.notification.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
