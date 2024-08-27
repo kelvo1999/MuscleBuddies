@@ -1,53 +1,93 @@
 <?php
 include '../db/db_connection.php'; // Include the database connection file
 
-// Initialize variables for error messages
-$error_message = '';
-$success_message = '';
-$duplicate_email = false;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $first_name = $conn->real_escape_string($_POST['first_name']);
-    $last_name = $conn->real_escape_string($_POST['last_name']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $phone = $conn->real_escape_string($_POST['phone']);
-    $password = $conn->real_escape_string($_POST['password']);
-    $confirm_password = $conn->real_escape_string($_POST['confirm_password']);
-    $gender = $conn->real_escape_string($_POST['gender']);
-    $location = $conn->real_escape_string($_POST['location']);
-    $age = (int)$_POST['age'];
+    // Get form data
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $gender = $_POST['gender'];
+    $location = $_POST['location'];
+    $age = $_POST['age'];
 
-    // Check for duplicate email
-    $email_check = "SELECT email FROM client WHERE email='$email'";
-    $result = $conn->query($email_check);
-
-    if ($result->num_rows > 0) {
-        $duplicate_email = true;
-    } elseif ($password !== $confirm_password) {
-        $error_message = "Passwords do not match.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = "Invalid email format.";
-    } else {
-        // Hash the password before storing it
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Insert data into the database
-        $sql = "INSERT INTO client (first_name, last_name, email, phone, password, gender, location, age) 
-                VALUES ('$first_name', '$last_name', '$email', '$phone', '$hashed_password', '$gender', '$location', '$age')";
-
-        if ($conn->query($sql) === TRUE) {
-            $success_message = "Registration successful!";
-            // Redirect to login page
-            header("Location: client.php");
-            exit(); // Make sure to exit after redirecting
-        } else {
-            $error_message = "Error: " . $sql . "<br>" . $conn->error;
-        }
+    // Validate that the password and confirm password match
+    if ($password !== $confirm_password) {
+        echo "<script>alert('Passwords do not match.'); window.history.back();</script>";
+        exit();
     }
 
+    // Check if the email already exists
+    $check_email_query = "SELECT * FROM client WHERE email='$email'";
+    $email_result = $conn->query($check_email_query);
+
+    if ($email_result->num_rows > 0) {
+        echo "<script>alert('This email is already registered. Please use a different email.'); window.history.back();</script>";
+        exit();
+    }
+
+    // Check if the phone number already exists
+    $check_phone_query = "SELECT * FROM client WHERE phone='$phone'";
+    $phone_result = $conn->query($check_phone_query);
+
+    if ($phone_result->num_rows > 0) {
+        echo "<script>alert('This phone number is already registered. Please use a different phone number.'); window.history.back();</script>";
+        exit();
+    }
+
+    // Generate a 6-digit OTP
+    $otp = rand(100000, 999999);
+
+    // Insert the data into the database with unverified status and OTP
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
+    $sql = "INSERT INTO client (first_name, last_name, email, phone, password, gender, location, age, otp)
+            VALUES ('$first_name', '$last_name', '$email', '$phone', '$hashed_password', '$gender', '$location', '$age', '$otp')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Send OTP to the user's email using PHPMailer
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'kelvoshisanya@gmail.com'; // Replace with your SMTP username
+            $mail->Password   = 'djnk adyp wnta gnve'; // Replace with your SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            //Recipients
+            $mail->setFrom('kelvoshisanya@gmail.com', 'Kiboko Body Builders');
+            $mail->addAddress($email);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Email Verification - Kiboko Body Builders';
+            $mail->Body    = "Your OTP code is: $otp";
+
+            $mail->send();
+            echo "<script>alert('Registration successful! Please check your email for the OTP to verify your account.'); window.location.href = 'verify_otp.php';</script>";
+        } catch (Exception $e) {
+            echo "<script>alert('Failed to send OTP. Please try again.'); window.history.back();</script>";
+        }
+    } else {
+        echo "<script>alert('Error: " . $sql . "<br>" . $conn->error . "'); window.history.back();</script>";
+    }
+
+    // Close the connection
     $conn->close();
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <select id="gender" name="gender" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <!-- <option value="Other">Other</option> -->
             </select><br><br>
 
             <label for="location">Location:</label><br>

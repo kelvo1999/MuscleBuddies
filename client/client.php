@@ -6,13 +6,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Query to check user credentials
-    $sql = "SELECT password FROM client WHERE email='$email'";
+    // Check if the email is registered and the user is verified
+    $sql = "SELECT password, verified FROM client WHERE email='$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        
+
+        // Check if the user is verified
+        if (!$user['verified']) {
+            echo "<script>alert('Your email is not verified. Please verify your email to log in.'); window.history.back();</script>";
+            exit();
+        }
+
         // Verify password
         if (password_verify($password, $user['password'])) {
             // Start session
@@ -28,17 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
             // Incorrect password
-            echo "<script>alert('Incorrect password.');</script>";
+            echo "<script>alert('Incorrect password.'); window.history.back();</script>";
         }
     } else {
-        // Email not found
-        echo "<script>alert('Email not registered.');</script>";
+        // Email not found or unverified
+        echo "<script>alert('Email not registered or not verified.'); window.history.back();</script>";
     }
-    
+
     // Close connection
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -46,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Client | Login</title>
     <link rel="stylesheet" href="style.css">
     <script>
         function showNotification(message, isSuccess) {
@@ -93,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" id="password" name="password" required><br><br>
 
             <input type="submit" value="Login">
+            <a href="register.php">Not a member? Register</a>
         </form>
     </main>
 

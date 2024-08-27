@@ -1,133 +1,132 @@
-/* Styles for Navbar and Footer */
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    top: 0;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    z-index: 1000;
-    /* Ensure header stays on top */
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 15px;
-    transition: background 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #555;
-}
-
-main {
-    padding: 80px 20px 60px 20px;
-    /* Added top padding to accommodate fixed header and bottom padding for footer */
-    margin: 0 auto;
-    /* Center align the content */
-    max-width: 800px;
-    /* Limit the maximum width of the content */
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 1px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-    z-index: 1000;
-    /* Ensure footer stays on top of content */
-}
-
-
-/* Additional Styles for Form */
-
-form {
-    background: #f7f7f7;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form label {
-    font-weight: bold;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="number"],
-form select {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover {
-    background-color: #555;
-}
-
-
-/* Notification Styles */
-
-.notification {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 15px;
-    border-radius: 4px;
-    font-size: 16px;
-    z-index: 1000;
-}
-
-.notification.success {
-    background-color: #dff0d8;
-    color: #3c763d;
-}
-
-.notification.error {
-    background-color: #f2dede;
-    color: #a94442;
-}
+    body {
+        background-image: url('../img/bg.jpg');
+    }
+    /* Styles for Navbar and Footer */
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        top: 0;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        z-index: 1000;
+        /* Ensure header stays on top */
+    }
+    
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        margin-left: 20px;
+    }
+    
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 15px;
+        transition: background 0.3s;
+    }
+    
+    nav ul li a:hover {
+        background-color: #555;
+    }
+    
+    main {
+        padding: 80px 20px 60px 20px;
+        /* Added top padding to accommodate fixed header and bottom padding for footer */
+        margin: 0 auto;
+        /* Center align the content */
+        max-width: 800px;
+        /* Limit the maximum width of the content */
+    }
+    
+    footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px 1px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        z-index: 1000;
+        /* Ensure footer stays on top of content */
+    }
+    /* Additional Styles for Form */
+    
+    form {
+        background: #f7f7f7;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    form label {
+        font-weight: bold;
+    }
+    
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"],
+    form input[type="number"],
+    form select {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    form input[type="submit"]:hover {
+        background-color: #555;
+    }
+    /* Notification Styles */
+    
+    .notification {
+        display: none;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        z-index: 1000;
+    }
+    
+    .notification.success {
+        background-color: #dff0d8;
+        color: #3c763d;
+    }
+    
+    .notification.error {
+        background-color: #f2dede;
+        color: #a94442;
+    }
