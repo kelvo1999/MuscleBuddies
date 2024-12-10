@@ -10,4 +10,7 @@ Email
 Phone
 Password
 Gender
-Location 
+Location
+
+
+Shop
